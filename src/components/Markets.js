@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBar from "./SearchBar";
 import Sidebar from './Sidebar';
+import Header from './Header';
 
 //Markets & Vendors Input data
 var data = [
@@ -19,15 +20,16 @@ var data_vendors = [
 class Markets extends React.Component {
     //Import Map
     componentDidMount () {
+      console.log("Started")
         L.mapbox.accessToken = 'pk.eyJ1IjoibWFyaWF0ZWNobWFuaWFjIiwiYSI6ImNpcWh2dnNjczAwOW1od2t4ajYybzY2b2MifQ.TdIEwB_XXvcKNrKxUBS1_g';
-        var map = L.mapbox.map('map', 'mapbox.streets')
-            .setView([51.5076134, -0.1570812], 14);
+        var map = L.mapbox.map('map', 'mapbox.streets').setView([51.5076134, -0.1570812], 14);
     }
+
     //Import Sidebar, Searchbar Components & Map Layer
     render () {
         return (
          <div>
-          <SearchBar data={data}/>
+          <Header/>
       	  <div id='map' style={{width: '100%'}}></div>
       	</div>
         );

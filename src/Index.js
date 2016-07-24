@@ -1,14 +1,16 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { render } from 'react-dom';
-import { Router, Route, hashHistory } from 'react-router';
-import App from './components/App';
-import Markets from './components/Markets';
+import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+import createRoutes from './Routes';
 
 window.React = React;
 
-render(
-  (<Router history={hashHistory}>
-    <Route path="/" component={Markets}>
-    </Route>
-  </Router>), document.getElementById('content')
+const routes = createRoutes();
+
+ReactDOM.render(
+  <Router history={hashHistory}>
+    {routes}
+  </Router>
+  , document.getElementById('content')
 );

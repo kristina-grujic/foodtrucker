@@ -1,48 +1,56 @@
 import React from 'react';
-import Sidebar from './Sidebar';
-import BasicComponent from './BasicComponent';
+import EventEmitter from 'events';
+var FaBeer = require('react-icons/lib/fa/search');
+ 
+export default class SearchBar extends React.Component{
 
-var GlobalFilters = React.createClass({
+  constructor(props) {
+      super(props);
+      this.displayName = 'SearchBar';
+  }
 
-    getInitialState: function () {
-        return {
-            filterText: ''
-        };
-    },
+  componentDidMount(){
+    EventEmitter.prototype.addListener('search', this.search.bind(this))
+  }
 
-    render: function () {
-        return (
-          <div>
-        <SearchBar
-              filterText={this.state.filterText}/>
-      <MarketsList
-              markets={this.props.data}
-              filterText={this.state.filterText}/>
+  search(query){
+    console.log(query)
+  }
+
+  render() {
+    return (
+      <div>
+        <SearchBox/>
+          { /* TODO: add search by date */ 
+            /*
+            <input type="date" />
+            */
+          }
       </div>
-        );
-    }
+    );
+  }
 
-});
-
-class SearchBar extends React.Component {
-    constructor(props) {
-        super(props);
-        this.displayName = 'SearchBar';
-    }
-    render() {
-        return (
-        <div>
-          <h1>SearchBar</h1>
-            <form>
-              <input type="text" placeholder=" Mexican, Vegan, Lobster ..."></input>
-              <input type="date" />
-            </form>
-            <BasicComponent/>
-        </div>
-      );
-    }
 }
 
+class SearchBox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { query: '' }
+    this.onChangeText = this.onChangeText.bind(this)
+  }
 
+  onChangeText(event){
+    var query = event.target.value
+    this.setState({query});
+    EventEmitter.prototype.emit('search', query)
+  }
 
-export default SearchBar;
+  render() {
+    return (
+      <div style={{backgroundColor:'#fff', borderRadius:20, borderColor: '#999', borderStyle:'solid', borderWidth:.5, margin:'0 auto', width: '80%'}}>
+        <input style={{backgroundColor:'transparent', border: 'none'}} onChange={this.onChangeText}/>
+        <FaBeer style={{position: 'relative', right:-2, width:13, height:13}}/>
+      </div>
+    )
+  }
+}
