@@ -1,15 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router';
-import { version } from '../../package.json';
+import Sidebar from './Sidebar';
 
-const App = ({ children }) => (
-  <div>
-    <section>
-      {children || <h1>HELLo</h1>}
-    </section>
-  </div>
-);
+export default class App extends React.Component {
 
-App.propTypes = { children: React.PropTypes.object };
+  render() {
+    var { children } = this.props;
+    return (
+      <div>
+        <section>
+          { children }
+        </section>
+        <Sidebar/>
+      </div>
+    );
+  }
 
-export default App;
+}
