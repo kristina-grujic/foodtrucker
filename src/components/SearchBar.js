@@ -1,7 +1,7 @@
 import React from 'react';
 import EventEmitter from 'events';
 var FaBeer = require('react-icons/lib/fa/search');
- 
+
 export default class SearchBar extends React.Component{
 
   constructor(props) {
@@ -9,19 +9,11 @@ export default class SearchBar extends React.Component{
       this.displayName = 'SearchBar';
   }
 
-  componentDidMount(){
-    EventEmitter.prototype.addListener('search', this.search.bind(this))
-  }
-
-  search(query){
-    console.log(query)
-  }
-
   render() {
     return (
       <div>
         <SearchBox/>
-          { /* TODO: add search by date */ 
+          { /* TODO: add search by date */
             /*
             <input type="date" />
             */

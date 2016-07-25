@@ -40,14 +40,20 @@
   "homepage": "https://github.com/Granze/react-starterify",
   "dependencies": {
     "history": "^3.0.0",
+    "immutable": "^3.8.1",
     "leaflet": "^0.7.7",
+    "lodash": "^4.14.0",
     "mapbox.js": "^2.4.0",
     "material-ui": "^0.15.2",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
     "react-icons": "^2.2.1",
+    "react-redux": "^4.4.5",
     "react-router": "^2.3.0",
     "react-tap-event-plugin": "^1.0.0",
+    "redux": "^3.5.2",
+    "redux-logger": "^2.6.1",
+    "redux-thunk": "^2.1.0",
     "xtend": "^4.0.1"
   },
   "devDependencies": {

@@ -1,7 +1,15 @@
 import React from 'react';
 import Sidebar from './Sidebar';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchMarkets, fetchVendors } from '../actions/markets/actions';
 
-export default class App extends React.Component {
+export class App extends React.Component {
+  constructor(props){
+    super(props)
+    props.fetchVendors();
+    props.fetchMarkets();
+  }
 
   render() {
     var { children } = this.props;
@@ -16,3 +24,13 @@ export default class App extends React.Component {
   }
 
 }
+
+
+const dispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    fetchVendors,
+    fetchMarkets
+  }, dispatch)
+}
+
+export default connect(null, dispatchToProps)(App)
