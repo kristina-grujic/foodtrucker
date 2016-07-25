@@ -41,7 +41,7 @@ export default function MarketsReducer(state = initialState, action) {
             return vendor;
           })
         .toList();
-      return state.merge({vendors: vendor_list});
+      return state.merge({vendors: vendor_list, filtered_vendors: vendor_list});
     case 'SEARCH_VENDORS':
       var q = action.query.toLowerCase()
       const filtered_vendors = state.vendors.filter(function(vendor) {

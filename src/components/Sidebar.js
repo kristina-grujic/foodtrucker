@@ -1,14 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-export default class Sidebar extends React.Component {
+export class Sidebar extends React.Component {
   constructor(props) {
       super(props);
       this.displayName = 'SideBar';
   }
   render() {
+    console.log(this.props.vendors)
       return (
       <div id="sidebar">
-        <h1>This is the sidebar</h1>
+        {this.props.vendors.map((vendor)=>{
+          return <div>{vendor.market_venue},{vendor.Vendor}</div>
+        })}
       </div>
       );
   }
@@ -53,3 +57,12 @@ class Market extends React.Component{
 		);
 	}
 }
+
+
+const stateToProps = (state) => {
+  return {
+    vendors : state.markets.filtered_vendors
+  }
+}
+
+export default connect(stateToProps, null)(Sidebar)
