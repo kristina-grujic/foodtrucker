@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { fetchMarkets, fetchVendors } from '../actions/markets/actions';
 import { EventEmitter } from 'events';
 
+import Markets from './Markets';
 
 const enumDays = {
   0 : 'Sunday',
@@ -39,7 +40,7 @@ export class App extends React.Component {
     return (
       <div>
         <section>
-          { children }
+          <Markets day={this.state.day}/>
         </section>
         <Sidebar day={this.state.day}/>
       </div>

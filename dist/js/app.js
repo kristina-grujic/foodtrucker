@@ -53918,21 +53918,13 @@ var _App = require('./components/App');
 
 var _App2 = _interopRequireDefault(_App);
 
-var _Markets = require('./components/Markets');
-
-var _Markets2 = _interopRequireDefault(_Markets);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function createRoutes() {
-  return _react2.default.createElement(
-    _reactRouter.Route,
-    { component: _App2.default, path: '/' },
-    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Markets2.default })
-  );
+  return _react2.default.createElement(_reactRouter.Route, { component: _App2.default, path: '/' });
 }
 
-},{"./components/App":273,"./components/Markets":275,"react":253,"react-router":84}],268:[function(require,module,exports){
+},{"./components/App":273,"react":253,"react-router":84}],268:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54182,6 +54174,10 @@ var _actions = require('../actions/markets/actions');
 
 var _events = require('events');
 
+var _Markets = require('./Markets');
+
+var _Markets2 = _interopRequireDefault(_Markets);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -54237,7 +54233,7 @@ var App = exports.App = function (_React$Component) {
         _react2.default.createElement(
           'section',
           null,
-          children
+          _react2.default.createElement(_Markets2.default, { day: this.state.day })
         ),
         _react2.default.createElement(_Sidebar2.default, { day: this.state.day })
       );
@@ -54256,7 +54252,7 @@ var dispatchToProps = function dispatchToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(null, dispatchToProps)(App);
 
-},{"../actions/markets/actions":269,"./Sidebar":277,"events":4,"react":253,"react-redux":50,"redux":261}],274:[function(require,module,exports){
+},{"../actions/markets/actions":269,"./Markets":275,"./Sidebar":277,"events":4,"react":253,"react-redux":50,"redux":261}],274:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54364,6 +54360,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var geojson = require('../data/markets');
+
 var Markets = function (_React$Component) {
   _inherits(Markets, _React$Component);
 
@@ -54381,12 +54379,40 @@ var Markets = function (_React$Component) {
 
       L.mapbox.accessToken = 'pk.eyJ1IjoibWFyaWF0ZWNobWFuaWFjIiwiYSI6ImNpcWh2dnNjczAwOW1od2t4ajYybzY2b2MifQ.TdIEwB_XXvcKNrKxUBS1_g';
       var map = L.mapbox.map('map', 'mapbox.streets').setView([51.5076134, -0.1570812], 14);
+      var styleLayer = L.mapbox.styleLayer('mapbox://styles/mariatechmaniac/ciqhvouef001peanhh22zz2rr').addTo(map);
+      this.featureLayer = L.mapbox.featureLayer().addTo(map);
     }
   }, {
     key: 'search',
     value: function search(query) {
       /* here should be added a timeout-like functionality once the backend is separated */
+      var component = this;
       this.props.searchVendors(query);
+      setTimeout(function () {
+        component.featureLayer.setGeoJSON(component.generateGeoJSON());
+      }, 200);
+    }
+  }, {
+    key: 'generateGeoJSON',
+    value: function generateGeoJSON() {
+      var _this2 = this;
+
+      var geojson = { "type": "FeatureCollection", "features": [] };
+      var day = this.props.day;
+      this.props.markets.map(function (market) {
+        if (market.vendors.size > 0 && market[day] != 'Closed') {
+          geojson['features'].push({
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: market.coordinates
+            },
+            properties: {}
+          });
+        }
+        return _this2;
+      });
+      return geojson;
     }
 
     //Import Sidebar, Searchbar Components & Map Layer
@@ -54408,15 +54434,22 @@ var Markets = function (_React$Component) {
 
 ;
 
+var stateToProps = function stateToProps(state) {
+  return {
+    vendors: state.markets.filtered_vendors,
+    markets: state.markets.filtered_markets
+  };
+};
+
 var dispatchToProps = function dispatchToProps(dispatch) {
   return (0, _redux.bindActionCreators)({
     searchVendors: _actions.searchVendors
   }, dispatch);
 };
 
-exports.default = (0, _reactRedux.connect)(null, dispatchToProps)(Markets);
+exports.default = (0, _reactRedux.connect)(stateToProps, dispatchToProps)(Markets);
 
-},{"../actions/markets/actions":269,"./Header":274,"./SearchBar":276,"./Sidebar":277,"events":4,"moment":40,"react":253,"react-redux":50,"redux":261}],276:[function(require,module,exports){
+},{"../actions/markets/actions":269,"../data/markets":278,"./Header":274,"./SearchBar":276,"./Sidebar":277,"events":4,"moment":40,"react":253,"react-redux":50,"redux":261}],276:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54553,6 +54586,7 @@ var Sidebar = exports.Sidebar = function (_React$Component) {
   _createClass(Sidebar, [{
     key: 'render',
     value: function render() {
+      console.log(this.props.markets);
       return _react2.default.createElement(
         'div',
         { id: 'sidebar', style: { overflow: 'scroll', height: '100%' } },
@@ -55151,7 +55185,7 @@ var markets = {
       "type": "Feature",
       "geometry": {
          "type": "Point",
-         "coordinates": {}
+         "coordinates": [-0.1238, 51.5148]
       },
       "properties": {
          "title": "Street Feast",

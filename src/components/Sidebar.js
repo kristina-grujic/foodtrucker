@@ -10,6 +10,7 @@ export class Sidebar extends React.Component {
       this.displayName = 'SideBar';
   }
   render() {
+    console.log(this.props.markets)
     return (
       <div id="sidebar" style={{overflow:'scroll', height:'100%'}}>
         <MarketsList day={this.props.day} markets={this.props.markets}/>
