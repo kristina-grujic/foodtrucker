@@ -54573,7 +54573,9 @@ var Vendor = function (_React$Component4) {
       for (var i = 1; i < tags.length; i++) {
         var div = _react2.default.createElement(
           'div',
-          { style: { display: 'inline' } },
+          { style: { margin: 2, display: 'inline-flex', backgroundColor: '#ddd',
+              borderColor: '#999', borderRadius: 10, borderWidth: .5, padding: 2,
+              paddingLeft: 10, paddingRight: 10, borderStyle: 'solid', fontSize: 12 } },
           tags[i]
         );
         renderedTags.push(div);
@@ -54589,7 +54591,7 @@ var Vendor = function (_React$Component4) {
         this.props.vendor.Vendor,
         _react2.default.createElement(
           'div',
-          null,
+          { style: { margin: 5 } },
           this.renderTags()
         )
       );

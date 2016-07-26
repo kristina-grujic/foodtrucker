@@ -81,7 +81,11 @@ class Vendor extends React.Component {
     const tags = this.props.vendor.Tags.split('#')
     var renderedTags = []
     for(var i=1; i<tags.length; i++){
-      const div = <div style={{display: 'inline'}}>{tags[i]}</div>
+      const div = <div style={{ margin: 2, display: 'inline-flex', backgroundColor:'#ddd',
+                                borderColor:'#999', borderRadius:10, borderWidth: .5, padding:2,
+                                paddingLeft:10, paddingRight:10, borderStyle:'solid', fontSize: 12, }}>
+                    {tags[i]}
+                  </div>
       renderedTags.push(div)
     }
     return renderedTags;
@@ -90,7 +94,7 @@ class Vendor extends React.Component {
     return(
       <div id="vendor">
         {this.props.vendor.Vendor}
-        <div>
+        <div style={{margin:5}}>
           {this.renderTags()}
         </div>
       </div>
