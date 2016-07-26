@@ -33,9 +33,28 @@ header {
     &:hover {
       background-color: #0085F3;
     }
+
   }
 }
 
+a {
+  display: inline-flex;
+  text-decoration: none;
+  color: #444;
+
+  &:visited {
+    text-decoration: none;
+    color: #444;
+  }
+  &:hover {
+    text-decoration: none;
+    color: #aaa;
+  }
+  &:active {
+    text-decoration: none;
+    color: #ddd;
+  }
+}
 #content {
   width: 100%;
   height: 100%;

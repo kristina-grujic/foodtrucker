@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+var Twitter = require('react-icons/lib/fa/twitter');
+var Instagram = require('react-icons/lib/fa/instagram');
+
 export class Sidebar extends React.Component {
   constructor(props) {
       super(props);
@@ -48,8 +51,7 @@ class Market extends React.Component{
   }
 
   showVendors(){
-    console.log('vendors')
-    this.setState({vendorsVisible: !this.state.vendorsVisible})
+    this.setState({vendorsVisible: true})
   }
 
   renderVendors(){
@@ -61,10 +63,10 @@ class Market extends React.Component{
     return <div/>
   }
   render() {
-    if (this.props.market.vendors.size>0){
+    if (this.props.market.vendors.size>0 && this.props.market[this.props.day]!='Closed'){
 		return (
     	<div id = "market" onClick={this.showVendors.bind(this)}>
-      	<h4 className= "MarketName">
+      <h4 className= "MarketName">
       	 {this.props.market.title}
       	</h4>
         <p>{this.props.market[this.props.day]}</p>
@@ -92,10 +94,14 @@ class Vendor extends React.Component {
   }
   render(){
     return(
-      <div id="vendor">
-        {this.props.vendor.Vendor}
+      <div id="vendor" onClick={undefined} style={{padding:10}}>
+        <a href={this.props.vendor.Website}>{this.props.vendor.Vendor}</a>
         <div style={{margin:5}}>
           {this.renderTags()}
+        </div>
+        <div style={{float:'right', margin:'-20px 0px 20px -20px', padding:-10}}>
+          <a href={this.props.vendor.Twitter}><Twitter style={{margin:5, width:18, height:18 }}/></a>
+          <a href={this.props.vendor.Instagram}><Instagram style={{margin:5, width:18, height:18}}/></a>
         </div>
       </div>
     )
