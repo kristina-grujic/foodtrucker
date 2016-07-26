@@ -6,11 +6,16 @@ import Header from './Header';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { searchVendors } from '../actions/markets/actions';
+import moment from 'moment';
 
 class Markets extends React.Component {
     //Import Map
+    constructor(props) {
+      super(props);
+    }
     componentDidMount () {
       EventEmitter.prototype.addListener('search', this.search.bind(this))
+
       L.mapbox.accessToken = 'pk.eyJ1IjoibWFyaWF0ZWNobWFuaWFjIiwiYSI6ImNpcWh2dnNjczAwOW1od2t4ajYybzY2b2MifQ.TdIEwB_XXvcKNrKxUBS1_g';
       var map = L.mapbox.map('map', 'mapbox.streets').setView([51.5076134, -0.1570812], 14);
     }

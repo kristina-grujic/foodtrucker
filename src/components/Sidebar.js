@@ -7,12 +7,9 @@ export class Sidebar extends React.Component {
       this.displayName = 'SideBar';
   }
   render() {
-    console.log(this.props.vendors)
-      return (
+    return (
       <div id="sidebar">
-        {this.props.vendors.map((vendor)=>{
-          return <div>{vendor.market_venue},{vendor.Vendor}</div>
-        })}
+        <MarketsList day={this.props.day} markets={this.props.markets}/>
       </div>
       );
   }
@@ -26,11 +23,11 @@ class MarketsList extends React.Component {
   }
 
   renderMarkets(){
-    var marketNodes = this.props.data.map(function(market){
+    const list = this;
+    console.log(this.props.markets)
+    var marketNodes = this.props.markets.map(function(market){
       return (
-        <Market marketname={market.marketname} key={market.id}>
-          {market.text}
-        </Market>
+        <Market market={market} day={list.props.day}/>
       );
     });
     return marketNodes;
@@ -47,21 +44,26 @@ class MarketsList extends React.Component {
 
 class Market extends React.Component{
   render() {
+    if (this.props.market.vendors.size>0){
 		return (
-    	<div className = "market">
-      	<h2 className= "MarketName">
-      	 {this.props.marketname}
-      	</h2>
+    	<div id = "market">
+      	<h4 className= "MarketName">
+      	 {this.props.market.title}
+      	</h4>
+        <p>{this.props.market[this.props.day]}</p>
       	{this.props.children}
     	</div>
 		);
+    }
+    return <div/>
 	}
 }
 
 
 const stateToProps = (state) => {
   return {
-    vendors : state.markets.filtered_vendors
+    vendors : state.markets.filtered_vendors,
+    markets : state.markets.filtered_markets
   }
 }
 

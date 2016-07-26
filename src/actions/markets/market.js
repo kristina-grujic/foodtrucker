@@ -11,7 +11,8 @@ const Market = Record({
   "Friday": "",
   "Saturday": "",
   "Sunday": "",
-  "Description" :""
+  "Description" :"",
+  vendors: []
 });
 
 export default Market;
