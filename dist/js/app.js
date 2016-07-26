@@ -54454,7 +54454,7 @@ var Sidebar = exports.Sidebar = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { id: 'sidebar' },
+        { id: 'sidebar', style: { overflow: 'scroll', height: '100%' } },
         _react2.default.createElement(MarketsList, { day: this.props.day, markets: this.props.markets })
       );
     }
@@ -54504,19 +54504,38 @@ var MarketsList = function (_React$Component2) {
 var Market = function (_React$Component3) {
   _inherits(Market, _React$Component3);
 
-  function Market() {
+  function Market(props) {
     _classCallCheck(this, Market);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Market).apply(this, arguments));
+    var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(Market).call(this, props));
+
+    _this3.state = { vendorsVisible: false };
+    return _this3;
   }
 
   _createClass(Market, [{
+    key: 'showVendors',
+    value: function showVendors() {
+      console.log('vendors');
+      this.setState({ vendorsVisible: !this.state.vendorsVisible });
+    }
+  }, {
+    key: 'renderVendors',
+    value: function renderVendors() {
+      if (this.state.vendorsVisible) {
+        return this.props.market.vendors.map(function (vendor) {
+          return _react2.default.createElement(Vendor, { vendor: vendor });
+        });
+      }
+      return _react2.default.createElement('div', null);
+    }
+  }, {
     key: 'render',
     value: function render() {
       if (this.props.market.vendors.size > 0) {
         return _react2.default.createElement(
           'div',
-          { id: 'market' },
+          { id: 'market', onClick: this.showVendors.bind(this) },
           _react2.default.createElement(
             'h4',
             { className: 'MarketName' },
@@ -54527,7 +54546,7 @@ var Market = function (_React$Component3) {
             null,
             this.props.market[this.props.day]
           ),
-          this.props.children
+          this.renderVendors()
         );
       }
       return _react2.default.createElement('div', null);
@@ -54535,6 +54554,49 @@ var Market = function (_React$Component3) {
   }]);
 
   return Market;
+}(_react2.default.Component);
+
+var Vendor = function (_React$Component4) {
+  _inherits(Vendor, _React$Component4);
+
+  function Vendor() {
+    _classCallCheck(this, Vendor);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Vendor).apply(this, arguments));
+  }
+
+  _createClass(Vendor, [{
+    key: 'renderTags',
+    value: function renderTags() {
+      var tags = this.props.vendor.Tags.split('#');
+      var renderedTags = [];
+      for (var i = 1; i < tags.length; i++) {
+        var div = _react2.default.createElement(
+          'div',
+          { style: { display: 'inline' } },
+          tags[i]
+        );
+        renderedTags.push(div);
+      }
+      return renderedTags;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { id: 'vendor' },
+        this.props.vendor.Vendor,
+        _react2.default.createElement(
+          'div',
+          null,
+          this.renderTags()
+        )
+      );
+    }
+  }]);
+
+  return Vendor;
 }(_react2.default.Component);
 
 var stateToProps = function stateToProps(state) {
