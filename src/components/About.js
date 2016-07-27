@@ -1,8 +1,11 @@
 import React from 'react';
 
+export default class About extends React.Component {
 //SVG+Rectangle On Click open Message
+render(){
+  return(
 <div>
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+{ /*<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
   <g>
   //about i icon
   <svg width="30px" height="30px" viewBox="8 731 30 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -16,5 +19,9 @@ import React from 'react';
     //Rectangle Over Icon
     <rect class="btn" x="8" y="731" width="10" height="10" onclick=window.prompt("email","helloworld@gmail.com") />
   </g>
-</svg>
+</svg> */
+}
 </div>
+);
+}
+}

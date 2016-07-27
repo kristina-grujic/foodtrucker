@@ -1,18 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-var Twitter = require('react-icons/lib/fa/twitter');
-var Instagram = require('react-icons/lib/fa/instagram');
-
 export class Sidebar extends React.Component {
   constructor(props) {
       super(props);
       this.displayName = 'SideBar';
   }
   render() {
-    console.log(this.props.markets)
     return (
       <div id="sidebar" style={{overflow:'scroll', height:'100%'}}>
+        <img src='../../media/tentstripe_sidebar.png' style={{width:'100%', height:20}}/>
         <MarketsList day={this.props.day} markets={this.props.markets}/>
       </div>
       );
@@ -27,7 +24,6 @@ class MarketsList extends React.Component {
 
   renderMarkets(){
     const list = this;
-    console.log(this.props.markets)
     var marketNodes = this.props.markets.map(function(market){
       return (
         <Market market={market} day={list.props.day}/>
@@ -38,7 +34,7 @@ class MarketsList extends React.Component {
 
   render() {
     return(
-      <div className="marketsList">
+      <div>
         { this.renderMarkets() }
       </div>
     );
@@ -67,12 +63,15 @@ class Market extends React.Component{
     if (this.props.market.vendors.size>0 && this.props.market[this.props.day]!='Closed'){
 		return (
     	<div id = "market" onClick={this.showVendors.bind(this)}>
-      <h4 className= "MarketName">
-      	 {this.props.market.title}
-      	</h4>
+        <img src='../../media/foodtruck_dribble.png' style={{width:80, height:65 }}/>
+        <div style={{display: 'inline-block', paddingLeft:20}}>
+        <h4 >
+        	{this.props.market.title}
+        </h4>
         <p>{this.props.market[this.props.day]}</p>
+        </div>
       	{this.renderVendors()}
-    	</div>
+      </div>
 		);
     }
     return <div/>
@@ -95,14 +94,22 @@ class Vendor extends React.Component {
   }
   render(){
     return(
-      <div id="vendor" onClick={undefined} style={{padding:10}}>
+      <div id="vendor" onClick={undefined} style={{padding:10, height:120}}>
         <a href={this.props.vendor.Website}>{this.props.vendor.Vendor}</a>
         <div style={{margin:5}}>
           {this.renderTags()}
         </div>
-        <div style={{float:'right', margin:'-20px 0px 20px -20px', padding:-10}}>
-          <a href={this.props.vendor.Twitter}><Twitter style={{margin:5, width:18, height:18 }}/></a>
-          <a href={this.props.vendor.Instagram}><Instagram style={{margin:5, width:18, height:18}}/></a>
+        <div style={{float:'right'}}>
+          { this.props.vendor.Twitter!='' ?
+              <a href={this.props.vendor.Twitter}><img src="../../media/twitter_color.png" style={{margin:5, width:18, height:18 }}/></a>
+              :
+              <a><img src="../../media/twitter_black.png" style={{margin:5, width:18, height:18 }}/></a>
+          }
+          { this.props.vendor.Instagram!='' ?
+            <a href={this.props.vendor.Instagram}><img src="../../media/instagram_color.png" style={{margin:5, width:18, height:18 }}/></a>
+            :
+            <a><img src="../../media/instagram_black.png" style={{margin:5, width:18, height:18 }}/></a>
+          }
         </div>
       </div>
     )

@@ -29,6 +29,15 @@ class SearchBox extends React.Component {
     this.onChangeText = this.onChangeText.bind(this)
   }
 
+  componentDidMount(){
+    EventEmitter.prototype.addListener('searchReset', this.resetSearch.bind(this,''))
+  }
+
+  resetSearch(){
+    this.setState({query: ''});
+    EventEmitter.prototype.emit(this.props.emittedEvent, '')
+  }
+
   onChangeText(event){
     var query = event.target.value
     this.setState({query});
@@ -37,8 +46,8 @@ class SearchBox extends React.Component {
 
   render() {
     return (
-      <div style={{backgroundColor:'#fff', borderRadius:20, borderColor: '#999', borderStyle:'solid', borderWidth:.5, margin:'0 auto', width: '80%'}}>
-        <input placeholder={this.props.placeholder} style={{backgroundColor:'transparent', border: 'none'}} onChange={this.onChangeText}/>
+      <div style={{backgroundColor:'#fff', borderRadius:20, borderColor: '#999', borderStyle:'solid', borderWidth:'1px', margin:'0 auto', marginBottom:10, width: '80%'}}>
+        <input placeholder={this.props.placeholder} style={{backgroundColor:'transparent', border: 'none'}} onChange={this.onChangeText} value={this.state.query}/>
         {this.props.emittedEvent=='search' ? <FaBeer style={{position: 'relative', right:-2, width:13, height:13}}/> : null }
       </div>
     )

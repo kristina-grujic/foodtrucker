@@ -31,6 +31,8 @@ export class App extends React.Component {
 
   dateToDay(date){
     var formattedDate = new Date(date);
+    if (date=='') formattedDate = new Date()
+    else formattedDate = new Date(date);
     const day = enumDays[formattedDate.getDay()]
     if (day!= undefined) this.setState({day: day})
   }
