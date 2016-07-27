@@ -94,7 +94,7 @@ class Vendor extends React.Component {
   }
   render(){
     return(
-      <div id="vendor" onClick={undefined} style={{padding:10, height:120}}>
+      <div id="vendor" onClick={undefined} style={{padding:10}}>
         <a href={this.props.vendor.Website}>{this.props.vendor.Vendor}</a>
         <div style={{margin:5}}>
           {this.renderTags()}

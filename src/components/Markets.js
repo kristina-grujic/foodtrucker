@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { searchVendors } from '../actions/markets/actions';
 import moment from 'moment';
 import About from './About';
+import Newsletter from './Newsletter';
 
 var geojson = require('../data/markets');
 
@@ -83,6 +84,7 @@ class Markets extends React.Component {
          <div>
           <Header/>
           <About/>
+          <Newsletter/>
       	  <div id='map' style={{width: '100%'}}></div>
       	</div>
         );

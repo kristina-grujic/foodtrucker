@@ -53878,7 +53878,7 @@ var fetchVendors = exports.fetchVendors = function fetchVendors() {
   };
 };
 
-},{"../../data/markets":277,"../../data/vendors":278}],268:[function(require,module,exports){
+},{"../../data/markets":278,"../../data/vendors":279}],268:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -54082,8 +54082,14 @@ var About = function (_React$Component) {
 
   _createClass(About, [{
     key: 'render',
+
+    //SVG+Rectangle On Click open Message
     value: function render() {
-      return _react2.default.createElement('div', null);
+      return _react2.default.createElement(
+        'div',
+        { style: { position: 'absolute', bottom: 0, left: 5 } },
+        _react2.default.createElement('img', { src: '../../media/about.png', style: { backgroundColor: 'white', borderRadius: 100 } })
+      );
     }
   }]);
 
@@ -54197,7 +54203,7 @@ var dispatchToProps = function dispatchToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(null, dispatchToProps)(App);
 
-},{"../actions/markets/actions":267,"./Markets":274,"./Sidebar":276,"events":4,"react":251,"react-redux":48,"redux":259}],273:[function(require,module,exports){
+},{"../actions/markets/actions":267,"./Markets":274,"./Sidebar":277,"events":4,"react":251,"react-redux":48,"redux":259}],273:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54264,7 +54270,7 @@ var Header = function (_Component) {
 
 exports.default = Header;
 
-},{"./SearchBar":275,"events":4,"react":251}],274:[function(require,module,exports){
+},{"./SearchBar":276,"events":4,"react":251}],274:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54304,6 +54310,10 @@ var _moment2 = _interopRequireDefault(_moment);
 var _About = require('./About');
 
 var _About2 = _interopRequireDefault(_About);
+
+var _Newsletter = require('./Newsletter');
+
+var _Newsletter2 = _interopRequireDefault(_Newsletter);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -54404,6 +54414,7 @@ var Markets = function (_React$Component) {
         null,
         _react2.default.createElement(_Header2.default, null),
         _react2.default.createElement(_About2.default, null),
+        _react2.default.createElement(_Newsletter2.default, null),
         _react2.default.createElement('div', { id: 'map', style: { width: '100%' } })
       );
     }
@@ -54429,7 +54440,58 @@ var dispatchToProps = function dispatchToProps(dispatch) {
 
 exports.default = (0, _reactRedux.connect)(stateToProps, dispatchToProps)(Markets);
 
-},{"../actions/markets/actions":267,"../data/markets":277,"./About":271,"./Header":273,"./SearchBar":275,"./Sidebar":276,"events":4,"moment":40,"react":251,"react-redux":48,"redux":259}],275:[function(require,module,exports){
+},{"../actions/markets/actions":267,"../data/markets":278,"./About":271,"./Header":273,"./Newsletter":275,"./SearchBar":276,"./Sidebar":277,"events":4,"moment":40,"react":251,"react-redux":48,"redux":259}],275:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+//Newsletter Envelope Icon
+
+var Newsletter = function (_React$Component) {
+  _inherits(Newsletter, _React$Component);
+
+  function Newsletter(props) {
+    _classCallCheck(this, Newsletter);
+
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Newsletter).call(this, props));
+
+    _this.displayName = 'Newsletter Message';
+    return _this;
+  }
+
+  _createClass(Newsletter, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { style: { position: 'absolute', bottom: 2, left: 45 } },
+        _react2.default.createElement('img', { src: '../../media/newsletter.png', style: { backgroundColor: 'white' } })
+      );
+    }
+  }]);
+
+  return Newsletter;
+}(_react2.default.Component);
+
+exports.default = Newsletter;
+
+},{"react":251}],276:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54535,7 +54597,7 @@ var SearchBox = function (_React$Component2) {
   return SearchBox;
 }(_react2.default.Component);
 
-},{"events":4,"moment":40,"react":251,"react-icons/lib/fa/search":45}],276:[function(require,module,exports){
+},{"events":4,"moment":40,"react":251,"react-icons/lib/fa/search":45}],277:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -54713,7 +54775,7 @@ var Vendor = function (_React$Component4) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { id: 'vendor', onClick: undefined, style: { padding: 10, height: 120 } },
+        { id: 'vendor', onClick: undefined, style: { padding: 10 } },
         _react2.default.createElement(
           'a',
           { href: this.props.vendor.Website },
@@ -54762,7 +54824,7 @@ var stateToProps = function stateToProps(state) {
 
 exports.default = (0, _reactRedux.connect)(stateToProps, null)(Sidebar);
 
-},{"react":251,"react-redux":48}],277:[function(require,module,exports){
+},{"react":251,"react-redux":48}],278:[function(require,module,exports){
 "use strict";
 
 var markets = {
@@ -55384,7 +55446,7 @@ var markets = {
 
 module.exports = markets;
 
-},{}],278:[function(require,module,exports){
+},{}],279:[function(require,module,exports){
 "use strict";
 
 var vendors = {
