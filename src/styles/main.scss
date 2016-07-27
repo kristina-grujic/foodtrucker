@@ -61,10 +61,7 @@ section {
   background-color: 'transparent';
   width:100%;
 }
-@font-face {
-    font-family: 'TakeItEasy'; /*a name to be used later*/
-    src: url('../../fonts/SignPainter-HouseScript.ttf') format('truetype'); /*URL to font*/
-}
+
 
 #headerBox {
   width: 400px;
@@ -97,7 +94,6 @@ section {
   padding: 5px;
 }
 #vendor{
-  background-color: #fff;
   margin-top:5px;
   padding: 5px;
 }

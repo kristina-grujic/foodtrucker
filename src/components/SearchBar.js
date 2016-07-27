@@ -12,6 +12,9 @@ export default class SearchBar extends React.Component{
 
 
   render() {
+    /* this is the component with two searchboxes we can see in header.
+       Change the second searchbox with datepicker once problem with css is fixed.
+    */ 
     return (
       <div>
         <SearchBox emittedEvent="search" placeholder="i.e asian"/>
@@ -34,6 +37,7 @@ class SearchBox extends React.Component {
   }
 
   resetSearch(){
+    /* if user clicks on logo, this function is executed */
     this.setState({query: ''});
     EventEmitter.prototype.emit(this.props.emittedEvent, '')
   }
@@ -41,6 +45,7 @@ class SearchBox extends React.Component {
   onChangeText(event){
     var query = event.target.value
     this.setState({query});
+    /* here an event is emitted based on the prop sent to component ('date' or 'search', to indicate which searchbox is sending the event) */
     EventEmitter.prototype.emit(this.props.emittedEvent, query)
   }
 

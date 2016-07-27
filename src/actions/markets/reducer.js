@@ -18,8 +18,10 @@ export default function MarketsReducer(state = initialState, action) {
 
   switch (action.type) {
     case 'FETCH_MARKETS':
+    /* here we are storing the markets we got as a response to our action in a redux storage, so it's globally available */
       var market_list = Seq(action.markets.features)
           .map((json) => {
+            /* list of vendors is mapped to a market */
             var vendors = state.vendors.filter(function(vendor) {
               return vendor.market_venue == json.properties.title
             })
@@ -40,6 +42,7 @@ export default function MarketsReducer(state = initialState, action) {
         .toList();
       return state.merge({markets: market_list, filtered_markets: market_list});
     case 'FETCH_VENDORS':
+      /* here we are storing the vendors we got as a response to our action in a redux storage, so it's globally available */
       var vendor_list = Seq(action.vendors.data)
           .map((json) => {
             const vendor = new Vendor(json)
@@ -49,11 +52,15 @@ export default function MarketsReducer(state = initialState, action) {
         const today = new Date()
       return state.merge({vendors: vendor_list, filtered_vendors: vendor_list});
     case 'SEARCH_VENDORS':
+
+      /* here we are actually filtering the existing markets fetched to get desired results */
       var q = action.query.toLowerCase()
       const filtered_vendors = state.vendors.filter(function(vendor) {
+                                /* if there is no tag containing the query nor name containing it, the vendor won't be in results */
                                 return (vendor.Tags.toLowerCase().indexOf(q)!=-1 || vendor.Vendor.toLowerCase().indexOf(q)!=-1) });
       var market_list = Seq(state.markets)
                         .map((market) => {
+                          /*  updating markets so we can later check if there are vendors in them matching the filters */
                           var vendors = filtered_vendors.filter(function(vendor) {
                             return vendor.market_venue == market.title
                           })

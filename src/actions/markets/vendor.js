@@ -6,7 +6,8 @@ const Vendor = Record({
   "Tags": [],
   "Twitter": "",
   "Website": "",
-  "Instagram": ""
+  "Instagram": "",
+  "Image URL": ''
 });
 
 export default Vendor;

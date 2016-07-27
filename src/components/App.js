@@ -7,6 +7,7 @@ import { EventEmitter } from 'events';
 
 import Markets from './Markets';
 
+/* enumeration to actually have the days as strings, since javascript's getDay function returns an integer */
 const enumDays = {
   0 : 'Sunday',
   1 : 'Monday',
@@ -20,6 +21,7 @@ const enumDays = {
 export class App extends React.Component {
   constructor(props){
     super(props)
+    /* two functions below are filling the redux store with data */
     props.fetchVendors();
     props.fetchMarkets();
     this.state = { day: enumDays[(new Date()).getDay()] }
@@ -30,6 +32,7 @@ export class App extends React.Component {
   }
 
   dateToDay(date){
+    /* function to get a day from a date */
     var formattedDate = new Date(date);
     if (date=='') formattedDate = new Date()
     else formattedDate = new Date(date);
@@ -38,7 +41,7 @@ export class App extends React.Component {
   }
 
   render() {
-    var { children } = this.props;
+    /* the core of an application */
     return (
       <div>
         <section>

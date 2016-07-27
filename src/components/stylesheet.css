@@ -6,5 +6,9 @@
 p.customfont {
     font-family: "My Custom Font", Verdana, Tahoma;
 }
+@font-face {
+    font-family: 'TakeItEasy';
+    src: url('../../fonts/SignPainter-HouseScript.ttf') format('truetype'); /*URL to font*/
+}
 </style>
 <p class="customfont">Hello world!</p>

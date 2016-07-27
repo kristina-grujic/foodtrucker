@@ -38,7 +38,7 @@ class Markets extends React.Component {
     }
 
     mapMarkersToJson(){
-
+      /* this function draws the markers to the map everytime search is made */
       this.featureLayer.on('layeradd', function(e) {
         var marker = e.layer,
         feature = marker.feature;
@@ -78,8 +78,8 @@ class Markets extends React.Component {
       return geojson
     }
 
-    //Import Sidebar, Searchbar Components & Map Layer
     render () {
+      /* header, about and newsletter, and map are rendered in this component. It appears as the root component of application */
         return (
          <div>
           <Header/>
@@ -92,6 +92,13 @@ class Markets extends React.Component {
 
 };
 
+
+/*
+  Code below this line is used everytime you need to have access to something from redux store or to call an action to change it
+  connect is a function with two parameters : first one is specifying what we need from redux store (stateToProps in this case),
+  and the second one is specifying the actions we can call to change the redux store. Connect is a wrapper function from react-redux
+  package which sends everything specified in its parameters to the component being wrapped as props.
+*/
 
 const stateToProps = (state) => {
   return {
