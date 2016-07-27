@@ -442,7 +442,7 @@ const markets = {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ -0.1238,51.5148 ]
+       "coordinates":  [0,0]
     },
     "properties": {
     "title":"Street Feast",

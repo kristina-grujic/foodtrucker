@@ -83,30 +83,35 @@ class Vendor extends React.Component {
     const tags = this.props.vendor.Tags.split('#')
     var renderedTags = []
     for(var i=1; i<tags.length; i++){
-      const div = <div style={{ margin: 2, display: 'inline-flex', backgroundColor:'#ddd',
+      const div = <a style={{ margin: 2,  backgroundColor:'#ddd',
                                 borderColor:'#999', borderRadius:10, borderWidth: .5, padding:2,
                                 paddingLeft:10, paddingRight:10, borderStyle:'solid', fontSize: 12, }}>
                     {tags[i]}
-                  </div>
+                  </a>
       renderedTags.push(div)
     }
     return renderedTags;
   }
   render(){
     return(
-      <div id="vendor" onClick={undefined} style={{padding:10}}>
-        <a href={this.props.vendor.Website}>{this.props.vendor.Vendor}</a>
-        <div style={{margin:5}}>
+      <div id="vendor" onClick={undefined} style={{padding:10, position:'relative'}}>
+        <div style={{display: 'inline-block'}}>
+          <img style={{width:60, height:60, borderRadius:60}} src={'../../media/thumbnails/'+this.props.vendor.Vendor+'.png'}/> { /* Since filename is the same as vendor's name, I can do this */ }
+        </div>
+        <div style={{display: 'inline-block', paddingLeft:20, width:150}}>
+        <a target="_blank" href={this.props.vendor.Website}>{this.props.vendor.Vendor}</a> { /* Target blank is added to open website in new tab */ }
+        <div style={{margin:5, width:200}}>
           {this.renderTags()}
         </div>
-        <div style={{float:'right'}}>
+        </div>
+        <div style={{position:'absolute', bottom:0}}>
           { this.props.vendor.Twitter!='' ?
-              <a href={this.props.vendor.Twitter}><img src="../../media/twitter_color.png" style={{margin:5, width:18, height:18 }}/></a>
+              <a target="_blank" href={this.props.vendor.Twitter}><img src="../../media/twitter_color.png" style={{margin:5, width:18, height:18 }}/></a>
               :
-              <a><img src="../../media/twitter_black.png" style={{margin:5, width:18, height:18 }}/></a>
+              <a><img src="../../media/twitter_black.png" style={{margin:5, width:18, height:18 }}/></a> /* if there is no twitter linked, black twitter icon will be rendered */
           }
           { this.props.vendor.Instagram!='' ?
-            <a href={this.props.vendor.Instagram}><img src="../../media/instagram_color.png" style={{margin:5, width:18, height:18 }}/></a>
+            <a target="_blank" href={this.props.vendor.Instagram}><img src="../../media/instagram_color.png" style={{margin:5, width:18, height:18 }}/></a>
             :
             <a><img src="../../media/instagram_black.png" style={{margin:5, width:18, height:18 }}/></a>
           }
